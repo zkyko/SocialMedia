@@ -2,6 +2,7 @@ from sqlalchemy import Column, Integer, String, Boolean, TIMESTAMP
 from sqlalchemy.sql import text
 from sqlalchemy import ForeignKey
 from sqlalchemy.ext.declarative import declarative_base
+from app.database import Base
 
 Base = declarative_base()
 

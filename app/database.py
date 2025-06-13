@@ -1,20 +1,22 @@
 from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.orm import sessionmaker 
-from sqlalchemy import Column, Integer, String, Boolean, TIMESTAMP
-from sqlalchemy.sql import text
-from sqlalchemy import ForeignKey       
-from app.models import Base
+from sqlalchemy.orm import sessionmaker
+import os
+from app.config import settings
 
+# Handle Heroku's legacy scheme
+SQLALCHEMY_DATABASE_URL = settings.DATABASE_URL
+if SQLALCHEMY_DATABASE_URL.startswith("postgres://"):
+    SQLALCHEMY_DATABASE_URL = SQLALCHEMY_DATABASE_URL.replace("postgres://", "postgresql://", 1)
 
-SQLALCHEMY_DATABASE_URL = 'postgresql://postgres:484848@localhost/fastapi'
-
-engine = create_engine(SQLALCHEMY_DATABASE_URL)
+# Setup SQLAlchemy engine and session
+engine = create_engine(SQLALCHEMY_DATABASE_URL, connect_args={"sslmode": "require"})
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
-Base = declarative_base()   
+# Declare base once, import this in models.py
+Base = declarative_base()
 
-#connection to alchemy database
+# Dependency to use in routes
 def get_db():
     db = SessionLocal()
     try:
