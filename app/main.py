@@ -56,7 +56,7 @@ while True:
 
 @app.get("/")
 def root():
-    return {"message": "welcome to my api"}
+    return {"message": "welcome to my social media api"}
 
     
 
