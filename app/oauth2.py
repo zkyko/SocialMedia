@@ -5,7 +5,7 @@ from sqlalchemy.orm import Session
 from datetime import datetime, timedelta, timezone
 from app import schema, database, models, utils
 
-SECRET_KEY = "09d25e06bfb62c5f52b35814cd9d5e06bfb62c5f52b35814cd9d5e06bfb62c5f52b35814cd9d5e06"
+SECRET_KEY = "secret_key"
 ALGORITHM = "HS256"
 ACCESS_TOKEN_EXPIRE_MINUTES = 30
 
